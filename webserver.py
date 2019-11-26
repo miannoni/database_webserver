@@ -18,7 +18,13 @@ tarefas = db.tarefas
 @app.route('/Tarefa', methods=['GET', 'POST'])
 def Tarefa():
     if request.method == 'GET':
-        return tarefas.find()
+        response = tarefas.find()
+        listinha = []
+        for i in response:
+            i["_id"] = str(i["_id"])
+            listinha.append(i)
+        response = {"resposta" : listinha}
+        return response
         # return redirecionador.redirect_request("listar")
         # return dicionario.dict
     if request.method == 'POST':
